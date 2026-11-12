@@ -1,0 +1,38 @@
+ID: model3d-default-material-only
+DOMAIN: model3d
+NAME: Default material only, no material slots
+SEVERITY: 3
+SIGNATURE: model3d|materials|no-material-or-default-name+single-slot
+SIGNALS:
+  - No usemtl or material assignment at all on a mesh of 12 or more faces
+  - Or every face uses one material named Material, default, lambert1 or Material.001
+  - Distinct physical parts (metal frame, wooden top) share the single slot
+  - No material IDs exist for later texturing or shader assignment
+STATIC_RULES: model3d.default-material
+WHY:
+  Generated meshes ship as one lump with the exporter's default material. Nobody decided what
+  the parts are made of, so texturing has to start by splitting the mesh.
+ASCII_SLOP:
++--SLOP--
+  front view of a table          material: Material.001
+  +------------------------+
+  +--+------------------+--+
+     |                  |
+     |                  |
+     +                  +
++--END--
+FIX:
+  Split faces into named material slots by physical part (wood_top, steel_legs, rubber_feet)
+  and assign each slot before export so texturing and shaders can target them.
+ASCII_FIXED:
++--FIXED--
+  front view of a table
+  +========================+   wood_top
+  +--+------------------+--+
+     |                  |      steel_legs
+     |                  |
+     #                  #      rubber_feet
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

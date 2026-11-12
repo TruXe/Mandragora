@@ -1,0 +1,32 @@
+ID: app-neon-glow-controls
+DOMAIN: app
+NAME: Neon glow on app controls
+SEVERITY: 3
+SIGNATURE: app|controls|colored-zero-offset-shadow+repeated-on-controls
+SIGNALS:
+  - .shadow(color: .purple, radius: 12) with no x or y offset on several views
+  - Compose Modifier.shadow with a colored ambientColor or spotColor
+  - XAML DropShadowEffect with ShadowDepth="0", BlurRadius of 10 or more and a hue
+  - Flutter BoxShadow with a saturated color, blurRadius 10+ and Offset.zero
+STATIC_RULES: app.neon-glow
+WHY:
+  Colored halos fake a light source that the rest of the interface does not have. They are
+  added to dark themes by default and pull focus from every control at once.
+ASCII_SLOP:
++--SLOP--
+   :::::::::::::     :::::::::::::
+  ::[  Start  ]::   ::[  Stop   ]::
+   :::::::::::::     :::::::::::::
+   : = cyan glow, radius 16, zero offset
++--END--
+FIX:
+  Remove the glows and distinguish the primary control by fill and placement instead. Use a
+  neutral elevation shadow only on surfaces that truly sit above others, such as menus.
+ASCII_FIXED:
++--FIXED--
+  [## Start ##]   [  Stop  ]
+  filled primary, outlined secondary, no halos
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

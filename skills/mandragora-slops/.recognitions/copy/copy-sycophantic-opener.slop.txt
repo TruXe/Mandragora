@@ -1,0 +1,29 @@
+ID: copy-sycophantic-opener
+DOMAIN: copy
+NAME: Sycophantic reply opener
+SEVERITY: 3
+SIGNATURE: copy|opener|great-question-or-absolutely+praise-before-answer
+SIGNALS:
+  - Text opens with Great question!, Absolutely! or Certainly!
+  - Or with I'd be happy to help before any content
+  - The opener praises or agrees before stating anything
+  - Common in support replies, docs FAQ answers and chat transcripts
+STATIC_RULES: copy.sycophantic-opener
+WHY:
+  Assistant-style openers are trained politeness that leaks into published text. Readers
+  recognize them as a chatbot reply pasted into a page.
+ASCII_SLOP:
++--SLOP--
+  Great question! Absolutely, you can export your data.
+  I'd be happy to help you with that.
++--END--
+FIX:
+  Delete the opener and start with the answer, then add the steps or the limit that applies.
+ASCII_FIXED:
++--FIXED--
+  Yes. Settings > Data > Export creates a ZIP of all projects
+  (CSV per table). Large workspaces take up to 10 minutes.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

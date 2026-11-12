@@ -1,0 +1,32 @@
+ID: web-trusted-by-logo-strip
+DOMAIN: web
+NAME: Trusted by placeholder logo strip
+SEVERITY: 3
+SIGNATURE: web|social-proof|trusted-by-line+logo-row+grayscale-or-placeholder
+SIGNALS:
+  - A line reading Trusted by, Loved by, Used by or Join 10,000+ teams
+  - Directly followed by a row of four to eight logos or brand names
+  - Logos rendered grayscale or at low opacity with equal spacing
+  - Brand names are placeholders such as Acme, Globex, Initech, Umbrella or Logoipsum
+STATIC_RULES: web.trusted-by-strip
+WHY:
+  Generators emit the strip before the product has any customers, so the names are invented
+  or generic. Readers have seen the same placeholder names on countless template sites.
+ASCII_SLOP:
++--SLOP--
+              Trusted by 10,000+ teams worldwide
+   [ACME]    [GLOBEX]    [INITECH]    [UMBRELLA]    [HOOLI]
+   (gray logos at 50% opacity, evenly spaced)
++--END--
+FIX:
+  Remove the strip until there are real customers who agreed to be named. Replace it with
+  one specific proof point: a named quote with role and company, a public case study link,
+  or a measured number from production use.
+ASCII_FIXED:
++--FIXED--
+   "We cut our month-end close from 9 days to 4."
+    Dana Ruiz, Controller, Northwind Freight   case study ->
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

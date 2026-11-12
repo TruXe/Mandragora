@@ -1,0 +1,38 @@
+ID: model3d-floating-parts
+DOMAIN: model3d
+NAME: Floating or intersecting disconnected parts
+SEVERITY: 3
+SIGNATURE: model3d|assembly|disconnected-components+gap-to-main-body
+SIGNALS:
+  - Two or more connected components in one object
+  - A smaller component sits more than 1 percent of the object size away from the main body
+  - Parts hover with no support or attachment geometry between them
+  - Small fragments left over from image-to-3D reconstruction near the surface
+STATIC_RULES: model3d.disconnected-parts
+WHY:
+  Generated meshes leave loose shards and parts that do not touch what they should hold.
+  The gap shows in close-up shots and breaks physics and collision setups.
+ASCII_SLOP:
++--SLOP--
+  side view
+       +----+         handle floats above the lid
+       +----+
+                      gap
+    +----------+
+    |          |
+    +----------+
++--END--
+FIX:
+  Delete stray fragments, then attach every intended part with real contact: move it onto the
+  surface, add the joint geometry (bolt, hinge, weld bead) or merge it into the main mesh.
+ASCII_FIXED:
++--FIXED--
+  side view
+       +----+
+    +--+----+--+     handle seated on the lid with a base plate
+    |          |
+    +----------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

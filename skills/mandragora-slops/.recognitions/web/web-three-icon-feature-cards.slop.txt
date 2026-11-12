@@ -1,0 +1,44 @@
+ID: web-three-icon-feature-cards
+DOMAIN: web
+NAME: Three equal feature cards with icon tiles
+SEVERITY: 4
+SIGNATURE: web|feature-section|three-identical-cards+icon-in-tinted-rounded-square
+SIGNALS:
+  - Exactly three (or a multiple of three) sibling cards with identical markup structure
+  - Each card opens with an icon inside a rounded square tinted with bg-*-50 or bg-*-100
+  - The icon tile is a fixed square such as w-12 h-12, the icon centered inside
+  - Each card then has a short bold title and a two line gray paragraph
+  - Container is grid-cols-3 with equal gaps and equal card heights
+STATIC_RULES: web.three-icon-cards
+WHY:
+  Three equal cards give every feature the same weight, which is never true of a real
+  product. The tinted icon tile is decoration that repeats the title in picture form.
+ASCII_SLOP:
++--SLOP--
+  +------------------+  +------------------+  +------------------+
+  | +--+             |  | +--+             |  | +--+             |
+  | |<>|             |  | |##|             |  | |()|             |
+  | +--+             |  | +--+             |  | +--+             |
+  | Lightning fast   |  | Secure by design |  | Easy to use      |
+  | Lorem ipsum dolor|  | Lorem ipsum dolor|  | Lorem ipsum dolor|
+  | sit amet consec. |  | sit amet consec. |  | sit amet consec. |
+  +------------------+  +------------------+  +------------------+
++--END--
+FIX:
+  Rank the features and give them unequal space: lead with the one users pay for, shown with
+  a real screenshot or output, and list the rest as plain text rows. Remove the icon tiles;
+  if an image is needed, use the actual UI fragment the feature produces.
+ASCII_FIXED:
++--FIXED--
+  +--------------------------------------+  Also included
+  | Offline sync                         |  - CSV and Parquet export
+  | +----------------------------------+ |  - SSO through any SAML provider
+  | | [screenshot: conflict resolver]  | |  - Audit log kept 400 days
+  | +----------------------------------+ |
+  | Edits made on the train merge when   |
+  | the laptop reconnects.               |
+  +--------------------------------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

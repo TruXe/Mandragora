@@ -1,0 +1,34 @@
+ID: copy-hype-vocabulary
+DOMAIN: copy
+NAME: Elevate, seamless, unlock, supercharge vocabulary
+SEVERITY: 4
+SIGNATURE: copy|vocabulary|elevate-seamless-unlock-supercharge-empower
+SIGNALS:
+  - Verbs such as elevate, unlock, supercharge, empower, unleash, streamline or leverage
+  - Adjectives such as seamless, effortless, transformative, holistic or groundbreaking
+  - Nouns such as tapestry, synergy, game-changer or paradigm shift
+  - The word could be deleted without losing any concrete information
+STATIC_RULES: copy.hype-words
+WHY:
+  These words are the highest-frequency fillers of model-written marketing text. They promise
+  an effect without naming what the product does.
+ASCII_SLOP:
++--SLOP--
+  +-------------------------------------------------------------+
+  | Elevate your workflow and unlock seamless collaboration     |
+  | that empowers teams to supercharge productivity.            |
+  +-------------------------------------------------------------+
++--END--
+FIX:
+  Delete each hype word and replace it with the concrete action, object and number it was
+  hiding. If nothing concrete remains, cut the sentence.
+ASCII_FIXED:
++--FIXED--
+  +-------------------------------------------------------------+
+  | Comments stay attached to the exact line of the contract,   |
+  | so reviews finish in one pass instead of three.             |
+  +-------------------------------------------------------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

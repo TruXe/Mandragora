@@ -1,0 +1,33 @@
+ID: tui-emoji-status-markers
+DOMAIN: tui
+NAME: Emoji as status markers
+SEVERITY: 3
+SIGNATURE: tui|status-line|emoji-prefix-marker+check-rocket-sparkles
+SIGNALS:
+  - Output lines start with emoji such as check mark, cross, rocket, sparkles or party
+  - Two or more lines use an emoji as the only status indicator
+  - Emoji widths break column alignment in many terminals and fonts
+  - Logs piped to files carry the emoji bytes into grep and CI output
+STATIC_RULES: tui.emoji-status
+WHY:
+  Emoji markers are the house style of generated CLIs and READMEs. They render
+  inconsistently across terminals and cannot be filtered reliably.
+ASCII_SLOP:
++--SLOP--
+  [check] Dependencies installed
+  [rocket] Server started
+  [sparkles] Ready to go
+  [cross] Lint failed
++--END--
+FIX:
+  Replace the emoji with fixed-width words (ok, fail, warn) in a leading column and add
+  the data each line is missing, such as counts, ports or file paths.
+ASCII_FIXED:
++--FIXED--
+  ok    dependencies  214 packages, 3.1s
+  ok    server        listening on :8080
+  fail  lint          src/app.ts:41 no-unused-vars
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

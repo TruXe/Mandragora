@@ -1,0 +1,45 @@
+ID: web-purple-blue-gradient-hero
+DOMAIN: web
+NAME: Purple to blue gradient hero background
+SEVERITY: 4
+SIGNATURE: web|hero-background|linear-gradient+purple-or-indigo+to-blue
+SIGNALS:
+  - Tailwind bg-gradient-to-* with from-purple, from-violet or from-indigo stops
+  - The to- stop is blue, sky, indigo or pink, a different family from the start
+  - CSS linear-gradient whose stops all sit between hue 195 and 335 degrees
+  - Gradient covers a full-width hero section behind centered white text
+  - Often paired with a blurred color blob or a noise overlay on top
+STATIC_RULES: web.purple-blue-gradient
+WHY:
+  Indigo to violet to blue is the default accent ramp of generated landing pages and of the
+  tools that make them. The gradient carries no product information, so it signals that
+  nobody chose a color on purpose.
+ASCII_SLOP:
++--SLOP--
+  +----------------------------------------------------------------+
+  |@@@@%%%%####****++++====----::::....                            |
+  |@@@@%%%%####****++++====----::::....      purple -> blue         |
+  |@@@@%%%%####**   Build faster with AI   ....                    |
+  |@@@@%%%%####****++++====----::::....                            |
+  |@@@@%%%%####****  [ Get started ]  ...                          |
+  |@@@@%%%%####****++++====----::::....                            |
+  +----------------------------------------------------------------+
++--END--
+FIX:
+  Replace the gradient with a flat surface from the brand palette, then move color to a
+  single accent element such as the primary button or one highlighted figure. Restructure
+  the hero around real content: a product screenshot, a code sample or a measured result.
+ASCII_FIXED:
++--FIXED--
+  +----------------------------------------------------------------+
+  |  Invoices reconciled                    +---------------------+ |
+  |  in under 4 minutes.                    | [product screenshot]| |
+  |                                         |  Jan  1,204  OK     | |
+  |  [ Start free ]  pricing ->             |  Feb    987  OK     | |
+  |                                         +---------------------+ |
+  +----------------------------------------------------------------+
+  flat off-white surface, one ink-blue button
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

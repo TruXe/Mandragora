@@ -1,0 +1,38 @@
+ID: tui-emoji-title-box-frames
+DOMAIN: tui
+NAME: Box frame around every block with emoji titles
+SEVERITY: 3
+SIGNATURE: tui|layout|box-drawing-frame-per-block+emoji-in-frame-title
+SIGNALS:
+  - Each output block sits inside a rounded or light box-drawing frame
+  - The top border carries a title that starts with an emoji such as rocket or package
+  - Three or more frames cover most of the non-empty output lines
+  - Frames wrap single lines that would read fine as plain text
+STATIC_RULES: tui.box-frame-emoji-title
+WHY:
+  Framing every block is what terminal UI libraries make one call away, so generated CLIs
+  box everything. The emoji title adds noise that breaks alignment and copy-paste.
+ASCII_SLOP:
++--SLOP--
+  +-- [rocket] Deploy ------------------+
+  | Target: production                  |
+  +-------------------------------------+
+  +-- [package] Build ------------------+
+  | 3 artifacts                         |
+  +-------------------------------------+
+  +-- [sparkles] Done ------------------+
+  | All good!                           |
+  +-------------------------------------+
++--END--
+FIX:
+  Remove the frames and emoji and print aligned plain lines with a short lowercase label
+  column. Keep one blank line between sections so the structure survives grep and piping.
+ASCII_FIXED:
++--FIXED--
+  deploy   target=production  region=eu-west-1
+  build    3 artifacts        12.4 MB
+  result   ok                 1m 42s
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

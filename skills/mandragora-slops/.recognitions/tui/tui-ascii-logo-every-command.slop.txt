@@ -1,0 +1,43 @@
+ID: tui-ascii-logo-every-command
+DOMAIN: tui
+NAME: ASCII-art logo printed on every command
+SEVERITY: 3
+SIGNATURE: tui|banner|figlet-ascii-logo+printed-per-command
+SIGNALS:
+  - A block of three or more lines of figlet-style art made of _ | / \ and block glyphs
+  - The same block appears again before the output of each command
+  - The art takes more lines than the useful output that follows it
+  - No flag exists to suppress it, so it lands in logs and pipes
+STATIC_RULES: tui.repeated-banner
+WHY:
+  Repeating a logo on every run wastes the screen the user needs for results. Generated CLIs
+  add figlet banners to look like a product.
+ASCII_SLOP:
++--SLOP--
+  $ tool status
+   _____           _
+  |_   _|__   ___ | |
+    | |/ _ \ / _ \| |
+    |_|\___/ \___/|_|
+  status: ok
+  $ tool list
+   _____           _
+  |_   _|__   ___ | |
+    | |/ _ \ / _ \| |
+    |_|\___/ \___/|_|
+  2 items
++--END--
+FIX:
+  Remove the banner from command output entirely; show the name and version only in --help
+  and --version. Put the first result on the first line.
+ASCII_FIXED:
++--FIXED--
+  $ tool status
+  status: ok  (3 workers, queue 0)
+  $ tool list
+  alpha  running  2h
+  beta   stopped  -
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

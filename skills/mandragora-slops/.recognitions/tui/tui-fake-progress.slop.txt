@@ -1,0 +1,34 @@
+ID: tui-fake-progress
+DOMAIN: tui
+NAME: Decorative progress bars and spinners
+SEVERITY: 3
+SIGNATURE: tui|progress|even-step-bar-or-label-only-spinner+no-real-source
+SIGNALS:
+  - A progress bar whose percentage advances in exactly equal steps, such as 20, 40, 60
+  - Steps redrawn through carriage returns at a fixed interval from a sleep loop
+  - Spinner frames repeating one label like Thinking or Warming up with no counter
+  - The work being shown finishes instantly or has no measurable total
+STATIC_RULES: tui.fake-progress
+WHY:
+  Even steps come from a timer, not from work, so the bar lies about how much is left.
+  Generated scripts add bars and spinners to look busy.
+ASCII_SLOP:
++--SLOP--
+  Initializing AI engine [####------]  40%
+  Initializing AI engine [######----]  60%
+  Initializing AI engine [########--]  80%
+  Initializing AI engine [##########] 100%
+  (each frame printed after sleep(0.5))
++--END--
+FIX:
+  Remove the bar unless a real total exists. When it does, drive it from the work (files,
+  bytes, items) and print the counts; for unknown durations print one line per finished step.
+ASCII_FIXED:
++--FIXED--
+  indexing 1,204 files
+  indexed  412/1204  (2.1 MB/s)
+  indexed 1204/1204  done in 9.8s
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

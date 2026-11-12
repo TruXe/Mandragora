@@ -1,0 +1,41 @@
+ID: texture-baked-lighting-albedo
+DOMAIN: texture
+NAME: Lighting and occlusion baked into albedo
+SEVERITY: 3
+SIGNATURE: texture|albedo|baked-light-gradient-or-vignette+directional-shading
+SIGNALS:
+  - Block means of the albedo fit a plane with a 40+ level change and R^2 of 0.6 or more
+  - Or a radial fit shows dark edges or a bright center of 40+ levels (vignette or AO)
+  - Highlights and shadows face one direction regardless of the surface orientation
+  - The map is named albedo, basecolor or diffuse but contains shading
+STATIC_RULES: texture.baked-lighting
+WHY:
+  Image generators render a lit photo, not a material, so light direction ends up in the
+  color map. In an engine the baked light fights the real light and the surface looks pasted.
+ASCII_SLOP:
++--SLOP--
+  ..::::::-------=====++++++*******###%%%%
+  ..::::::------======+++++++******###%%%%
+  ...::::::-----=====++++++++*****####%%%%
+  ...:::::-------===++++++++*******####%%%
+  ...:::::------=====++++++********####%%%
+  ..::::::------======++++++*******####%%%
+  dark left to bright right: a light from the right is painted in
++--END--
+FIX:
+  Delight the map: remove the low-frequency luminance trend with a large high-pass or a
+  gradient fit, and move occlusion into a separate AO map. Keep only local color variation
+  that belongs to the material itself.
+ASCII_FIXED:
++--FIXED--
+  ++*++++++****+++++++++++=++=======++++*+
+  +++++++++++**++++++++++++=========++++*+
+  +++++++++++++++++++***+++========+++**++
+  *+++++++++++++++++*****+++=======++++++*
+  ++++++++++*+++++++*****++++++=====++++++
+  **+++++++++++++++++++++++++++=======+++*
+  even mean value across the tile; only material variation remains
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

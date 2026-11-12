@@ -1,0 +1,41 @@
+ID: texture-oversaturated-uniform-noise
+DOMAIN: texture
+NAME: Oversaturated uniform procedural noise
+SEVERITY: 3
+SIGNATURE: texture|albedo|high-saturation+single-scale-noise+no-large-forms
+SIGNALS:
+  - Mean HSV saturation of 0.55 or more with a spread of 0.12 or less
+  - Detail energy at 4 px blocks is under 0.35 of the per-pixel energy (one scale only)
+  - No large shapes or gradients: every region looks like the same static
+  - Hue held constant across the image instead of drifting with material changes
+STATIC_RULES: texture.uniform-noise
+WHY:
+  Real materials vary at several scales and are rarely saturated. A single layer of bright
+  noise is the default output of quick procedural setups and generated swatches.
+ASCII_SLOP:
++--SLOP--
+  =-*-+=-+-+--+#-=*#+=#-#=--=#-+*=+--=*+=+
+  +=**=++#*=#-+*-+-**+#=*+++##+*-**##==*-+
+  ---*-==#-++###=+=##--==++=-+=+#*+**-#*#*
+  ==-*--=-=----=-#*-===-##++--==#--#+-+-+#
+  #*==-*+*==#####*=+=--==*#+###===-=*##+**
+  -*#**+-*=##=+#*---##-##*=+--#*+#+##====+
+  per-pixel static in one saturated hue
++--END--
+FIX:
+  Rebuild the texture from layered scales: a large form layer, a medium breakup layer and
+  fine grain at low strength. Reduce saturation toward measured values for the material and
+  let hue drift slightly with the large layer.
+ASCII_FIXED:
++--FIXED--
+  ====++++******+++=----==++=+****++======
+  ====++++******+++==---==++++***+++======
+  =====++*******++++======+++++++++=======
+  ===++******##***++======+++++==+++======
+  ====+++++****+++===----====+++*+++======
+  ===+++++*+++++++==-----====++***++======
+  large forms first, fine grain on top, muted saturation
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

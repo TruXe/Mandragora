@@ -1,0 +1,33 @@
+ID: copy-emoji-bullets
+DOMAIN: copy
+NAME: Emoji bullet lists
+SEVERITY: 3
+SIGNATURE: copy|list|emoji-as-bullet-marker+repeated
+SIGNALS:
+  - Two or more list items start with an emoji instead of a word or plain bullet
+  - Typical glyphs: check mark, rocket, sparkles, lightning, lock, chart
+  - The emoji repeats the meaning of the first word of the item
+  - Used in READMEs, release notes and landing page feature lists
+STATIC_RULES: copy.emoji-bullets
+WHY:
+  Emoji bullets are the default list style of model-written READMEs and announcements. They
+  decorate without adding meaning and break screen reader flow.
+ASCII_SLOP:
++--SLOP--
+  [rocket] Blazing fast performance
+  [lock] Enterprise-grade security
+  [sparkles] Beautiful UI
+  [chart] Powerful analytics
++--END--
+FIX:
+  Replace the emoji with plain bullets or numbers and rewrite each item as a specific fact.
+  Group related items under one short heading instead of decorating each line.
+ASCII_FIXED:
++--FIXED--
+  - Renders a 10,000 row table in 30 ms
+  - SSO through SAML and SCIM provisioning
+  - Exports to CSV, Parquet and Excel
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

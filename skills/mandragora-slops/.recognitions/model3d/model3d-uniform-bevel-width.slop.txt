@@ -1,0 +1,41 @@
+ID: model3d-uniform-bevel-width
+DOMAIN: model3d
+NAME: Identical bevel width on every edge
+SEVERITY: 3
+SIGNATURE: model3d|edges|chamfer-strips+identical-width-everywhere
+SIGNALS:
+  - Eight or more thin chamfer strips (aspect 4:1 or more) meeting both neighbors at 20-70 deg
+  - Strip widths vary by 5 percent or less across the whole mesh
+  - Exposed edges and protected edges carry exactly the same bevel
+  - Corner patches are identical triangles at every corner
+STATIC_RULES: model3d.uniform-bevel
+WHY:
+  A one-click bevel modifier gives every edge the same width, which no manufactured or worn
+  object has. Generated and kitbashed props show this machine-perfect rim everywhere.
+ASCII_SLOP:
++--SLOP--
+  front view            every edge: bevel 0.10
+    /--------------\
+   /                \
+  |                  |
+  |                  |
+   \                /
+    \--------------/
++--END--
+FIX:
+  Vary bevel width by function and exposure: wide on edges that get handled or hit, tight on
+  joints and seams, none where parts meet flush. Rebuild the bevels per edge group instead of
+  one global modifier value.
+ASCII_FIXED:
++--FIXED--
+  front view      top edges 0.15, sides 0.04, base 0.08
+   /----------------\
+  /                  \
+  |                  |
+  |                  |
+  |                  |
+   \----------------/
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,30 @@
+ID: copy-negative-parallelism
+DOMAIN: copy
+NAME: Negative parallelism (not just X, but Y)
+SEVERITY: 3
+SIGNATURE: copy|structure|not-just-x-but-y+negative-parallelism
+SIGNALS:
+  - Constructions like not just X, but Y or not only X but also Y
+  - Pairs like It is not about X. It is about Y.
+  - Phrases such as more than just a tool or no longer just a chat app
+  - The negated half sets up a claim nobody made
+STATIC_RULES: copy.negative-parallelism
+WHY:
+  The pattern invents a weaker alternative to knock down so the real claim sounds bigger. It
+  is a signature move of model-written persuasion.
+ASCII_SLOP:
++--SLOP--
+  It's not just a calendar, it's your productivity partner.
+  Not only fast, but also secure.
++--END--
+FIX:
+  Delete the negated half and state the positive claim directly, with the detail that makes
+  it true.
+ASCII_FIXED:
++--FIXED--
+  The calendar books rooms and sends the agenda with the invite.
+  Data is encrypted at rest with per-tenant keys.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

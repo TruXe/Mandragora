@@ -1,0 +1,2 @@
+Yes. Settings > Data > Export creates a ZIP of all projects (CSV per table).
+Large workspaces take up to 10 minutes.

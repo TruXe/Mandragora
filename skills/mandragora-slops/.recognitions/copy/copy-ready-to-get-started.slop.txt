@@ -1,0 +1,31 @@
+ID: copy-ready-to-get-started
+DOMAIN: copy
+NAME: Closing offer such as Ready to get started?
+SEVERITY: 3
+SIGNATURE: copy|closing|ready-to-get-started+generic-closing-offer
+SIGNALS:
+  - Closing lines like Ready to get started?, Get started today! or What are you waiting for?
+  - Chat-style closers: Let me know if you'd like, Feel free to reach out, I hope this helps
+  - Join thousands of happy customers with no number source
+  - The closer repeats a call to action already shown above
+STATIC_RULES: copy.closing-offer
+WHY:
+  Models end texts with an offer to continue or a generic rallying call. The line adds no
+  information and marks the text as generated.
+ASCII_SLOP:
++--SLOP--
+  ...and that's how it works!
+  Ready to get started? Join thousands of happy teams today!
+  Let me know if you'd like more details.
++--END--
+FIX:
+  End on the last useful fact or the one specific next step with its cost or time. Delete
+  conversational closers in documentation and UI text.
+ASCII_FIXED:
++--FIXED--
+  The free plan covers 3 projects; upgrading keeps all history.
+  [ Create a project ]
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,45 @@
+ID: web-rounded-shadow-everywhere
+DOMAIN: web
+NAME: rounded-2xl and shadow-xl on every container
+SEVERITY: 3
+SIGNATURE: web|containers|rounded-2xl-or-more+shadow-xl-or-more+applied-everywhere
+SIGNALS:
+  - Half or more of all styled containers carry rounded-2xl or a larger radius
+  - The same containers also carry shadow-xl or shadow-2xl (blur of 20px or more)
+  - Cards, inputs wrappers, modals and section wrappers share the same treatment
+  - No container uses a flat border or no surface at all for contrast
+STATIC_RULES: web.rounded-shadow-ratio
+WHY:
+  When every box floats with the same large radius and soft shadow, elevation stops meaning
+  anything. It is the house style of generated component libraries.
+ASCII_SLOP:
++--SLOP--
+   .----------------.   .----------------.
+  (   Profile        ) (   Billing        )
+   '----------------'   '----------------'
+     ::::::::::::::       ::::::::::::::
+   .----------------------------------.
+  (   Notifications                    )
+   '----------------------------------'
+     ::::::::::::::::::::::::::::::::
+  every box rounded 16px+, every box casts a 25px shadow
++--END--
+FIX:
+  Reserve elevation for the one layer that truly floats (a menu or a dialog). Convert the
+  other containers to flat sections split by spacing or 1px rules, and use a small radius
+  that matches the controls instead of one large radius for everything.
+ASCII_FIXED:
++--FIXED--
+  Profile                  Billing
+  name, email, avatar      plan, card, invoices
+  ----------------------------------------------
+  Notifications
+  email digest, mentions, security alerts
+  ----------------------------------------------
+                       +---------------+
+                       | Save changes  |  <- only the popover floats
+                       +---------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

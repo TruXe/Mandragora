@@ -1,0 +1,38 @@
+ID: model3d-flipped-normals
+DOMAIN: model3d
+NAME: Flipped or inconsistent normals
+SEVERITY: 4
+SIGNATURE: model3d|topology|inconsistent-winding+inward-normals
+SIGNALS:
+  - Adjacent faces traverse their shared edge in the same direction (inconsistent winding)
+  - A closed mesh has negative signed volume, so every normal points inward
+  - Faces render black or vanish with backface culling enabled
+  - Lighting flips from one face to its neighbor on a flat surface
+STATIC_RULES: model3d.flipped-normals
+WHY:
+  Generated meshes stitch patches without a consistent orientation. The result shades in
+  stripes and disappears in engines that cull back faces.
+ASCII_SLOP:
++--SLOP--
+  top view of a cube, arrows = face normals
+  +--------+
+  |   ^    |   top face points out
+  +--------+
+  |   v    |   front face points in (flipped)
+  +--------+
++--END--
+FIX:
+  Recalculate normals outside with a consistent winding from one seed face, flip the
+  minority faces, then verify signed volume is positive and backface culling shows no holes.
+ASCII_FIXED:
++--FIXED--
+  top view of a cube
+  +--------+
+  |   ^    |   all faces wound the same way,
+  +--------+   normals point out
+  |   ^    |
+  +--------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,34 @@
+ID: model3d-uv-stretch
+DOMAIN: model3d
+NAME: Heavily stretched auto-unwrapped UVs
+SEVERITY: 3
+SIGNATURE: model3d|uv|texel-density-spread+stretched-or-collapsed-triangles
+SIGNALS:
+  - log2 spread of UV area over surface area of 1.0 or more across triangles
+  - 20 percent or more of triangles stretched by 4x or collapsed to zero UV area
+  - Checker texture shows long smears on some faces and tiny squares on others
+  - Seams placed where the unwrapper defaulted, not along hidden edges
+STATIC_RULES: model3d.uv-stretch
+WHY:
+  Automatic unwrapping without seam planning trades even texel density for speed. Generated
+  meshes ship with these layouts, so textures smear across large faces.
+ASCII_SLOP:
++--SLOP--
+  checker on the mesh
+  [][][][][]  ==========
+  [][][][][]  ==========   right face: one row stretched
+  [][][][][]  ==========
++--END--
+FIX:
+  Re-unwrap with planned seams along hidden edges, relax the islands for even texel density,
+  and scale islands by visible importance before packing.
+ASCII_FIXED:
++--FIXED--
+  checker on the mesh
+  [][][][][]  [][][][][]
+  [][][][][]  [][][][][]   same square size on every face
+  [][][][][]  [][][][][]
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

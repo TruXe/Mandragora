@@ -1,0 +1,15 @@
+<Window x:Class="Survey.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="#FAFAF9">
+  <DockPanel>
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="12">
+      <Button Content="Projects"/>
+      <TextBlock Text="Harbor Survey" FontSize="18" Margin="12,0,0,0"/>
+    </StackPanel>
+    <StackPanel Margin="12">
+      <TextBlock Text="3 sites need review"/>
+      <Button Content="Review sites" Background="#1E3A8A" Foreground="White"/>
+    </StackPanel>
+  </DockPanel>
+</Window>

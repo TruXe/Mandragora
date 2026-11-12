@@ -1,0 +1,37 @@
+ID: model3d-non-manifold-edges
+DOMAIN: model3d
+NAME: Non-manifold edges and holes
+SEVERITY: 4
+SIGNATURE: model3d|topology|edges-shared-by-3-plus-faces-or-holes-in-closed-mesh
+SIGNALS:
+  - One or more edges are shared by three or more faces (fins, internal faces)
+  - Open boundary edges make up less than 10 percent of edges in a mostly closed mesh
+  - Booleans or merges left zero-thickness walls inside the volume
+  - Mesh fails a 3D print or physics hull export check
+STATIC_RULES: model3d.non-manifold
+WHY:
+  Image-to-3D outputs and quick merges create geometry that has no inside or outside.
+  Engines, printers and bakers then fail or shade the area wrong.
+ASCII_SLOP:
++--SLOP--
+  side view            fin attached to one edge
+  +--------+
+  |        |--------+
+  |        |  fin   |   edge shared by 3 faces
+  +--------+--------+
+  missing face on top leaves a hole
++--END--
+FIX:
+  Remove internal and fin faces, merge or bridge the open edges so every edge has exactly two
+  faces, and rebuild boolean areas with clean edge loops before export.
+ASCII_FIXED:
++--FIXED--
+  side view
+  +-----------------+
+  |                 |
+  |                 |   every edge borders two faces
+  +-----------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

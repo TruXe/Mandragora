@@ -1,0 +1,37 @@
+ID: web-gradient-clipped-headline
+DOMAIN: web
+NAME: Gradient-clipped headline text
+SEVERITY: 4
+SIGNATURE: web|headline|background-clip-text+gradient-fill+transparent-text
+SIGNALS:
+  - Tailwind bg-clip-text together with text-transparent on a heading or span
+  - A gradient utility (bg-gradient-to-*, from-*, to-*) on the same element
+  - CSS background-clip: text or -webkit-background-clip: text with a gradient image
+  - color or -webkit-text-fill-color set to transparent on the same rule
+  - Usually wraps two or three words of the h1, such as the product promise
+STATIC_RULES: web.gradient-text
+WHY:
+  Gradient text is a decoration that generators apply to the most important words because it
+  is easy, not because the message needs it. It also lowers contrast, so the key words become
+  the hardest ones to read.
+ASCII_SLOP:
++--SLOP--
+   The future of work is
+   .:-=+*#%@@%#*+=-:.  .:-=+*#%@@%#*+=-:.
+   :  A I - p o w e r e d   w o r k f l o w s  :
+   .:-=+*#%@@%#*+=-:.  .:-=+*#%@@%#*+=-:.
+   (second line filled with a pink -> violet gradient)
++--END--
+FIX:
+  Remove the clip and the gradient and set the headline in one solid ink color. Give the
+  emphasis to structure instead: shorten the sentence, put the key number or noun first, or
+  switch the emphasized words to a heavier weight of a contrasting typeface.
+ASCII_FIXED:
++--FIXED--
+   Close the books
+   3 days earlier.
+   ^^^^^^^^^^^^^^^ solid ink, heavier weight, number leads
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

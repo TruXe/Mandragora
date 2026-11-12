@@ -1,0 +1,5 @@
+$ tool status
+status: ok  (3 workers, queue 0)
+$ tool list
+alpha  running  2h
+beta   stopped  -

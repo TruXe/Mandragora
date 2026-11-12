@@ -1,0 +1,37 @@
+ID: web-single-sans-no-hierarchy
+DOMAIN: web
+NAME: Single sans font with size-only hierarchy
+SEVERITY: 3
+SIGNATURE: web|typography|single-generic-sans+size-only-hierarchy
+SIGNALS:
+  - Every font-family declaration names Inter, system-ui, Roboto or another generic sans
+  - No serif, mono or display family appears anywhere in the page or its config
+  - Headings differ from body text only by size steps such as text-xl to text-5xl
+  - No uppercase labels, small caps, italics or a second voice for data
+STATIC_RULES: web.single-sans-font
+WHY:
+  One neutral sans in several sizes is what a page gets when nobody sets type. Data, labels
+  and prose all speak with the same voice, so the reader cannot tell them apart at a glance.
+ASCII_SLOP:
++--SLOP--
+  BIG HEADING IN INTER 48PX
+  Medium heading in Inter 24px
+  Body copy in Inter 16px explains the plan and prices.
+  Price 29 per month in Inter 16px
+  Footnote in Inter 14px
+  (same family, same rhythm, only the size changes)
++--END--
+FIX:
+  Pair two families with different jobs: a serif or display face for headlines and a mono or
+  tabular face for numbers and labels, keeping the sans for body text. Add a small uppercase
+  label style for metadata so the hierarchy no longer depends on size alone.
+ASCII_FIXED:
++--FIXED--
+  Plans for small studios          <- serif display, 40px
+  PRICE PER SEAT                   <- sans caps label, tracked
+  29.00 / month                    <- mono tabular figures
+  Body copy in the sans explains what the plan includes.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

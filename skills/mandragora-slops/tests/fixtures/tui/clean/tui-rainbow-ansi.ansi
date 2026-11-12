@@ -1,0 +1,3 @@
+deploy started  service=api  region=eu-1
+uploading 3 files (1.2 MB)
+^[[31merror^[[0m upload of assets.tar failed: timeout after 30s ^[[2m(attempt 2 of 3)^[[0m

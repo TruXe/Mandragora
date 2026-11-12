@@ -1,0 +1,15 @@
+<Window x:Class="Survey.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid>
+    <Border Height="140">
+      <Border.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+          <GradientStop Color="#FF7C3AED" Offset="0"/>
+          <GradientStop Color="#FF3B82F6" Offset="1"/>
+        </LinearGradientBrush>
+      </Border.Background>
+      <TextBlock Text="Hello, Alex!" Foreground="White" FontSize="28"/>
+    </Border>
+  </Grid>
+</Window>

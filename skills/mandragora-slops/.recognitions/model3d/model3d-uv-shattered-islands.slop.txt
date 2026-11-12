@@ -1,0 +1,40 @@
+ID: model3d-uv-shattered-islands
+DOMAIN: model3d
+NAME: Shattered UV islands with no seam logic
+SEVERITY: 3
+SIGNATURE: model3d|uv|near-per-face-islands+no-seam-planning
+SIGNALS:
+  - UV island count is half the face count or more on a mesh of 24+ faces
+  - Most islands are single faces or tiny strips scattered in the atlas
+  - Seams run across visible flat surfaces instead of along edges
+  - Texture painting and mip filtering show seams on every face
+STATIC_RULES: model3d.uv-shattered
+WHY:
+  Smart projection with default angles cuts the surface into confetti. The layout cannot be
+  painted by hand and leaks color at every border.
+ASCII_SLOP:
++--SLOP--
+  UV atlas
+  +---------------------------+
+  | /| [] |\ <> [] /|  |\ []  |
+  | <> /| [] |\ <> [] /| <>   |
+  | [] |\ <> /| [] |\ <> /|   |
+  +---------------------------+
+  one island per face
++--END--
+FIX:
+  Replace the projection with a planned unwrap: cut seams along hard and hidden edges so each
+  part becomes one island, then pack the few islands with consistent texel density.
+ASCII_FIXED:
++--FIXED--
+  UV atlas
+  +---------------------------+
+  | +---------+  +----------+ |
+  | |  top    |  |  sides   | |
+  | +---------+  +----------+ |
+  +---------------------------+
+  two islands following the part layout
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

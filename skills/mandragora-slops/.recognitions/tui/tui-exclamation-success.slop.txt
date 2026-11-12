@@ -1,0 +1,31 @@
+ID: tui-exclamation-success
+DOMAIN: tui
+NAME: Exclamation success line with no data
+SEVERITY: 3
+SIGNATURE: tui|status-line|exclamation-success-word+no-count-path-or-id
+SIGNALS:
+  - Lines such as Success!, Done!, All set! or Everything is ready! on their own
+  - The line carries no number, file path, identifier or duration
+  - Often decorated with a party or sparkles emoji at the end
+  - Printed even when the command did nothing new
+STATIC_RULES: tui.empty-success
+WHY:
+  An exclamation without data tells the user nothing they can verify. Generated tools end
+  every run with cheer instead of a result.
+ASCII_SLOP:
++--SLOP--
+  Processing...
+  Success! [party]
+  All set! You're ready to go!
++--END--
+FIX:
+  Replace the cheer with the result: what changed, how many, where it went and how long it
+  took. Print nothing extra when nothing changed, and exit non-zero on failure.
+ASCII_FIXED:
++--FIXED--
+  wrote 3 files to ./dist (48 KB) in 0.9s
+  nothing to update: lockfile unchanged
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,94 @@
+{
+ "asset": {
+  "version": "2.0",
+  "generator": "mandragora tests/make_fixtures.py"
+ },
+ "scene": 0,
+ "scenes": [
+  {
+   "nodes": [
+    0
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "mesh": 0,
+   "name": "panel"
+  }
+ ],
+ "meshes": [
+  {
+   "name": "panel",
+   "primitives": [
+    {
+     "attributes": {
+      "POSITION": 0,
+      "TEXCOORD_0": 2
+     },
+     "indices": 1,
+     "mode": 4,
+     "material": 0
+    }
+   ]
+  }
+ ],
+ "buffers": [
+  {
+   "byteLength": 692,
+   "uri": "data:application/octet-stream;base64,AAAAwAAAAMAAAAAAAACAvwAAAMAAAAAAAAAAAAAAAMAAAAAAAACAPwAAAMAAAAAAAAAAQAAAAMAAAAAAAAAAwAAAgL8AAAAAAACAvwAAgL8AAAAAAAAAAAAAgL8AAAAAAACAPwAAgL8AAAAAAAAAQAAAgL8AAAAAAAAAwAAAAAAAAAAAAACAvwAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAwAAAgD8AAAAAAACAvwAAgD8AAAAAAAAAAAAAgD8AAAAAAACAPwAAgD8AAAAAAAAAQAAAgD8AAAAAAAAAwAAAAEAAAAAAAACAvwAAAEAAAAAAAAAAAAAAAEAAAAAAAACAPwAAAEAAAAAAAAAAQAAAAEAAAAAAAAABAAYAAAAGAAUAAQACAAcAAQAHAAYAAgADAAgAAgAIAAcAAwAEAAkAAwAJAAgABQAGAAsABQALAAoABgAHAAwABgAMAAsABwAIAA0ABwANAAwACAAJAA4ACAAOAA0ACgALABAACgAQAA8ACwAMABEACwARABAADAANABIADAASABEADQAOABMADQATABIADwAQABUADwAVABQAEAARABYAEAAWABUAEQASABcAEQAXABYAEgATABgAEgAYABcAAAAAAAAAAAAAAIA+AAAAAAAAAD8AAAAAAABAPwAAAAAAAIA/AAAAAAAAAAAAAIA+AACAPgAAgD4AAAA/AACAPgAAQD8AAIA+AACAPwAAgD4AAAAAAAAAPwAAgD4AAAA/AAAAPwAAAD8AAEA/AAAAPwAAgD8AAAA/AAAAAAAAQD8AAIA+AABAPwAAAD8AAEA/AABAPwAAQD8AAIA/AABAPwAAAAAAAIA/AACAPgAAgD8AAAA/AACAPwAAQD8AAIA/AACAPwAAgD8="
+  }
+ ],
+ "bufferViews": [
+  {
+   "buffer": 0,
+   "byteOffset": 0,
+   "byteLength": 300
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 300,
+   "byteLength": 192
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 492,
+   "byteLength": 200
+  }
+ ],
+ "accessors": [
+  {
+   "bufferView": 0,
+   "componentType": 5126,
+   "count": 25,
+   "type": "VEC3",
+   "min": [
+    -2.0,
+    -2.0,
+    0.0
+   ],
+   "max": [
+    2.0,
+    2.0,
+    0.0
+   ]
+  },
+  {
+   "bufferView": 1,
+   "componentType": 5123,
+   "count": 96,
+   "type": "SCALAR"
+  },
+  {
+   "bufferView": 2,
+   "componentType": 5126,
+   "count": 25,
+   "type": "VEC2"
+  }
+ ],
+ "materials": [
+  {
+   "name": "plaster"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+ID: app-greeting-stat-dashboard
+DOMAIN: app
+NAME: Welcome back greeting over delta stat tiles
+SEVERITY: 3
+SIGNATURE: app|home-screen|welcome-back-greeting+percent-delta-stat-tiles
+SIGNALS:
+  - Header text such as Welcome back, Alex or Good morning, Sam with a wave emoji
+  - Three or more tiles below it each showing a percent delta like +12.5%
+  - Deltas are green up arrows or red down arrows with no time window stated
+  - Greeting takes the most prominent position on the screen
+STATIC_RULES: app.greeting-stat-row
+WHY:
+  The greeting spends the best screen space on politeness and the deltas lack a baseline. It
+  is the first home screen every generated admin app shows.
+ASCII_SLOP:
++--SLOP--
+  Welcome back, Alex! (wave)
+  +----------+ +----------+ +----------+
+  | Sales    | | Visitors | | Orders   |
+  | +12.5%   | | +8.2%    | | -3.1%    |
+  +----------+ +----------+ +----------+
++--END--
+FIX:
+  Replace the greeting with the task the user came for (items waiting, the next deadline).
+  State each change with its baseline and period, and drop tiles nobody acts on.
+ASCII_FIXED:
++--FIXED--
+  4 orders waiting to ship (oldest: 2 days)
+  [ Open shipping queue ]
+  Sales this week   18,240   up from 16,210 last week
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,39 @@
+ID: texture-histogram-clipping
+DOMAIN: texture
+NAME: Histogram clipping in albedo
+SEVERITY: 3
+SIGNATURE: texture|albedo|crushed-blacks-or-blown-whites+clipped-histogram
+SIGNALS:
+  - Three percent or more of pixels sit at luminance 0 to 2 (crushed blacks)
+  - Or three percent or more sit at 253 to 255 (blown whites)
+  - Flat patches with no detail inside the clipped areas
+  - Albedo values outside the physically plausible range for the material
+STATIC_RULES: texture.histogram-clip
+WHY:
+  Generated images push contrast for impact, and albedo maps inherit the clipped extremes. No
+  real material is pure black or pure white, so lighting looks wrong on clipped areas.
+ASCII_SLOP:
++--SLOP--
+   :=*#@@@#%%@@@@@@%#+=++-
+  ..-+*##**++*#%@@#%%*+**+=-:           ..
+  .  -+=---:..:=#*+#@%#%%@@@#=::-:.     ..
+     :---::   :-==+*%%@@@@@@%#****=:
+    .:-+**+-:-=+*%@@@@@@@@@@@@@@@@@@%#*=:
+  blank runs are pure black, @ runs are pure white
++--END--
+FIX:
+  Remap the values into the material's plausible albedo range (roughly 30 to 240 in sRGB)
+  and recover detail inside the former clipped areas from the source or by repainting.
+  Move contrast for drama into lighting instead of the color map.
+ASCII_FIXED:
++--FIXED--
+  -==++***+++******+++=++=-----::::-------
+  ===++++++++++***++++++++===------------=
+  =--=+=========++++*++++***+======--:--==
+  --====+===-=+==++++*#************+++==--
+  --===++++====+++****###******##***+++==-
+  full range kept inside 30..240, detail visible everywhere
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

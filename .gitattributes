@@ -1,0 +1,5 @@
+# Recognition files and fixtures must stay LF on every platform.
+* text=auto eol=lf
+*.png binary
+*.glb binary
+*.bin binary

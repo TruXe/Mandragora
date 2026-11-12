@@ -1,0 +1,14 @@
+.page {
+  background: #f4f4f5;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.metric-card .value {
+  font-variant-numeric: tabular-nums;
+}

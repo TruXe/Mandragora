@@ -1,0 +1,40 @@
+ID: app-purple-gradient-header
+DOMAIN: app
+NAME: Purple to blue gradient header
+SEVERITY: 4
+SIGNATURE: app|header|linear-gradient+purple-or-indigo+to-blue
+SIGNALS:
+  - LinearGradient, LinearGradientBrush or Brush.horizontalGradient on a header or hero
+  - Stops are purple, indigo or violet blending to blue, such as .purple to .blue
+  - Hex stops like 0xFF7C3AED to 0xFF3B82F6, or ImGui AddRectFilledMultiColor in those hues
+  - White title text and a greeting or app name sit on the gradient
+STATIC_RULES: app.gradient-header
+WHY:
+  The same violet to blue ramp tops generated mobile and desktop apps regardless of brand. It
+  is chosen by default and signals that the color system was never designed.
+ASCII_SLOP:
++--SLOP--
+  +--------------------------------+
+  |@@@%%%###***+++===---:::...     |
+  |@@@%%%###  Hello, Alex!  ..     |
+  |@@@%%%###***+++===---:::...     |
+  +--------------------------------+
+  | content                        |
+  +--------------------------------+
++--END--
+FIX:
+  Replace the gradient with the app's neutral surface and move the title into the regular
+  navigation bar. Keep color for state and action (a primary button, an error), and let the
+  header show the current context, such as the selected project.
+ASCII_FIXED:
++--FIXED--
+  +--------------------------------+
+  | < Projects     Harbor Survey   |
+  +--------------------------------+
+  | 3 sites need review            |
+  | [ Review sites ]               |
+  +--------------------------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,41 @@
+ID: model3d-melted-topology
+DOMAIN: model3d
+NAME: Melted image-to-3D topology
+SEVERITY: 3
+SIGNATURE: model3d|topology|dense-triangles+no-sharp-edges+irregular-valence
+SIGNALS:
+  - 200 or more triangles and no quads at all
+  - Fewer than 0.5 percent of edges are sharp (dihedral above 35 degrees)
+  - Vertex valence spread of 0.6 or more, or 10 percent sliver triangles
+  - Corners that should be crisp (box edges, rims, joints) read as soft blobs
+STATIC_RULES: model3d.melted-topology
+WHY:
+  Image-to-3D and marching cubes output a smooth isosurface with no notion of hard edges. The
+  object looks melted, and the topology cannot be animated or UV mapped cleanly.
+ASCII_SLOP:
++--SLOP--
+  front view of a "box"
+     .-~~~~~~~-.
+   .'           '.
+  (               )
+  (               )
+   '.           .'
+     '-~~~~~~~-'
+  dense random triangles, no crisp corner anywhere
++--END--
+FIX:
+  Retopologize: rebuild the mesh with quads following the form, restore hard edges at
+  corners and rims as sharp creases, and bake the scan detail into a normal map.
+ASCII_FIXED:
++--FIXED--
+  front view of a box
+  +---------------+
+  |               |
+  |               |
+  |               |
+  +---------------+
+  clean quads, sharp creases at the corners
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

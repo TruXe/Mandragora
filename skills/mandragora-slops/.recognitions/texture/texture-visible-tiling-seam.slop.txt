@@ -1,0 +1,41 @@
+ID: texture-visible-tiling-seam
+DOMAIN: texture
+NAME: Visible tiling seam
+SEVERITY: 4
+SIGNATURE: texture|tiling|wrap-edge-discontinuity+visible-seam-line
+SIGNALS:
+  - Mean difference between the last and first column (or row) is 2x the interior neighbor step
+  - The wrap edge differs by 8 or more luminance levels on average
+  - Tiling the texture 2x2 shows a straight line where the copies meet
+  - Detail is cut off at the border instead of continuing on the opposite edge
+STATIC_RULES: texture.tiling-seam
+WHY:
+  Generated textures are produced as single images, not as periodic surfaces, so their edges
+  do not match. The seam shows as a grid of lines the moment the texture repeats on a wall.
+ASCII_SLOP:
++--SLOP--
+  **##**#*+-::   .-+*+|**##**#*+-::   .-+*+
+  **%#*##*=-:::..:-+**|**%#*##*=-:::..:-+**
+  *#%%**#*=-:-=-:--+**|*#%%**#*=-:-=-:--+**
+  **##****==--==--=++*|**##****==--==--=++*
+  ****#+++-===+======*|****#+++-===+======*
+  ******+=--==+++=+-=*|******+=--==+++=+-=*
+  2x1 repeat: the column marked | is a hard jump in value
++--END--
+FIX:
+  Rebuild the texture as a periodic surface: offset it by half its size, paint or
+  regenerate across the exposed seam, and verify by tiling 3x3. For procedural sources,
+  sample noise on a torus or wrap the lattice so both edges come from the same values.
+ASCII_FIXED:
++--FIXED--
+  :-----===++=---==-----:-===+****++++===-
+  ::----=======-----------===+*****++++==-
+  .:--:----::-=----=====-====++++***+++=-:
+  .::::::::::::----==+++======++++++====-:
+  :::.......:..:===++*#***+++++===+-::----
+  --:...  ....:-==+*##%##***+++====-:::::-
+  right edge continues into the left edge; 3x3 tiling shows no line
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

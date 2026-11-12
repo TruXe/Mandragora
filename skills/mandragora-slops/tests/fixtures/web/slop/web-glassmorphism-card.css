@@ -1,0 +1,12 @@
+.page {
+  background: radial-gradient(circle at 20% 20%, #f97316, transparent 40%), #111827;
+}
+
+.glass-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  padding: 24px;
+}

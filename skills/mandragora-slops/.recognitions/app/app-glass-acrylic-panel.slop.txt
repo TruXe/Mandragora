@@ -1,0 +1,39 @@
+ID: app-glass-acrylic-panel
+DOMAIN: app
+NAME: Glass or acrylic panel with white hairline
+SEVERITY: 3
+SIGNATURE: app|panel|blur-material+translucent-white-fill+white-hairline-stroke
+SIGNALS:
+  - Blur or material backdrop: .ultraThinMaterial, Modifier.blur, BackdropFilter, AcrylicBrush
+  - Translucent white fill such as Color.white.opacity(0.15) or #26FFFFFF
+  - A white stroke at low opacity drawn around the panel edge
+  - Panels placed over a gradient or photo so the blur is visible
+STATIC_RULES: app.glass-panel
+WHY:
+  The frosted look is a screenshot effect that lowers contrast for every label on the panel.
+  Generated apps stack these panels over gradients to look premium.
+ASCII_SLOP:
++--SLOP--
+  .:-=+*#%@%#*+=-:.  photo or gradient
+  :-=+----------------+=-:
+  -=+| . . . . . . .  |+=-
+  =+*|  Now playing   |*+=
+  -=+|  Track 04      |+=-
+  :-=+----------------+=-:
+  white 15% fill, white 25% stroke, blur 30
++--END--
+FIX:
+  Remove the blur and the white stroke and place controls on an opaque system surface
+  with full contrast. Separate layers by elevation steps or spacing, not by transparency.
+ASCII_FIXED:
++--FIXED--
+  +------------------------+
+  | Now playing            |
+  | Track 04  3:12 / 5:40  |
+  | [<<]  [ || ]  [>>]     |
+  +------------------------+
+  opaque surface, system text colors
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

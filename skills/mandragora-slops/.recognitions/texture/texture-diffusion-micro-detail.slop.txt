@@ -1,0 +1,39 @@
+ID: texture-diffusion-micro-detail
+DOMAIN: texture
+NAME: Incoherent diffusion micro-detail
+SEVERITY: 4
+SIGNATURE: texture|detail|melting-structures+pseudo-glyph-text+inconsistent-physics
+SIGNALS:
+  - Repeating structures such as bricks, planks or rivets that melt into each other
+  - Letter-like shapes that form no readable word in any alphabet
+  - Mortar lines, grain or cracks that start and stop without a cause
+  - Scale of small features drifts across the image with no material reason
+STATIC_RULES: none (rubric only)
+WHY:
+  Diffusion models paint plausible local texture without a model of how the material was
+  built. Up close the structure stops making physical sense, which viewers read as generated.
+ASCII_SLOP:
++--SLOP--
+  +------+------+-----~~+------+
+  |      |      |   ~~  |  ~~~~|~~~
+  +----~~+~~----+-~~----+~~    |
+  | ~~~~ |  AQRE  W1N\ |       |
+  +~~----+------+--~~~-+~~~----+
+  bricks melt together; 'AQRE W1N' is a pseudo-glyph, not text
++--END--
+FIX:
+  Rebuild the structural layer from rules: model the brick or plank layout with explicit
+  sizes and mortar width, then add generated detail only inside each unit. Remove fake text
+  or replace it with real, legible signage authored on purpose.
+ASCII_FIXED:
++--FIXED--
+  +------+------+------+------+
+  |      |      |      |      |
+  +---+--+---+--+---+--+---+--+
+  |   |      |      |      |  |
+  +---+------+------+------+--+
+  running bond, constant mortar, wear inside each brick
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

@@ -1,0 +1,41 @@
+ID: texture-mirror-symmetry
+DOMAIN: texture
+NAME: Mirrored detail revealing a flip axis
+SEVERITY: 3
+SIGNATURE: texture|composition|mirror-axis+flipped-detail-correlation
+SIGNALS:
+  - Correlation between the image and its left/right or top/bottom flip of 0.9 or more
+  - A visible center line where every feature meets its own reflection
+  - Cracks, knots or stains appear in symmetric pairs
+  - Often produced to hide a seam by mirroring instead of repainting
+STATIC_RULES: texture.mirror-axis
+WHY:
+  Natural surfaces almost never mirror, so paired features expose the edit at once. Mirroring
+  is a common shortcut in generated and quickly tiled textures.
+ASCII_SLOP:
++--SLOP--
+  ==+===--:--==*#*#*==|==*#*#*==--:--===+==
+  ========--:-+*###*+=|=+*###*+-:--========
+  -=-=++*++:.:+**##*+=|=+*##**+:.:++*++=-=-
+  ====*##*=:.:+++**+==|==+**+++:.:=*##*====
+  ==++###*=:::+++**+++|+++**+++:::=*###++==
+  +=++###*=:::==+****+|+****+==:::=*###++=+
+  every feature on the left reappears flipped on the right of |
++--END--
+FIX:
+  Remove the mirrored half and repaint it with new detail, or offset and rotate source
+  patches so no feature has a reflected partner. Check by flipping the result: the flip
+  should look like a different texture.
+ASCII_FIXED:
++--FIXED--
+  ++++++===+++++++++++++++===-::-::-====++
+  ++++====+++===++++=++++====-:::::-=+++++
+  ***+---=+===-=======++=====-::::-=+*****
+  ##*+====+++====----========-----=++**###
+  ##***++++++++=--::--=---:------==++++*##
+  ##****++++====-:::::--:::::----====++**#
+  no axis: the left and right halves carry different features
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

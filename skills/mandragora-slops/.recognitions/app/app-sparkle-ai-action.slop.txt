@@ -1,0 +1,38 @@
+ID: app-sparkle-ai-action
+DOMAIN: app
+NAME: Sparkles icon on AI actions
+SEVERITY: 3
+SIGNATURE: app|icon|sparkles-or-magic-wand+labels-ai-action
+SIGNALS:
+  - SF Symbol sparkles or wand.and.stars via Image(systemName:)
+  - Compose Icons.Filled.AutoAwesome or Flutter Icons.auto_awesome
+  - ImGui ICON_FA_WAND_MAGIC_SPARKLES or a sparkles emoji in a label
+  - Attached to toolbar buttons or FABs whose action involves generation
+STATIC_RULES: app.sparkle-ai
+WHY:
+  The icon promises magic instead of naming the result. It is the default glyph for any AI
+  entry point, so the feature reads as a bolted-on template.
+ASCII_SLOP:
++--SLOP--
+  +--------------------------------------+
+  | Notes                         [ * ]  |
+  |                                      |
+  |                          ( * Ask AI )|
+  +--------------------------------------+
+  * = sparkles symbol
++--END--
+FIX:
+  Remove the sparkles and name the action and its output: Summarize note, Make checklist.
+  If an icon helps, draw the output (a list, a page), and place the action where the user
+  edits, not in a floating button.
+ASCII_FIXED:
++--FIXED--
+  +--------------------------------------+
+  | Notes                                |
+  | Meeting 12 Mar                       |
+  | [ Summarize note ] [ Make checklist ]|
+  +--------------------------------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

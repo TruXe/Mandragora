@@ -1,0 +1,47 @@
+ID: web-pill-dot-outline-badge
+DOMAIN: web
+NAME: Pill status badge with inner dot and matching outline
+SEVERITY: 4
+SIGNATURE: web|status-badge|pill-shape+inner-dot+outline-matches-dot
+SIGNALS:
+  - Container is a full pill: rounded-full, or border-radius of 50px or more
+  - A 6 to 10 px colored circle sits before the label inside the pill
+  - The pill border or ring uses the same hue family as the dot
+  - Background is a pale tint of that hue and the text a dark shade of it
+  - Label is a one word state such as Active, Live, New, Beta or Online
+STATIC_RULES: web.pill-dot-outline-badge
+WHY:
+  Shape, dot, outline and tint all encode the same state, which a one word label never needs.
+  It is the default badge of most component generators and appears unchanged across
+  thousands of generated dashboards.
+ASCII_SLOP:
++--SLOP--
+  Deployments
+  +----------------------------------------------------------+
+  | api-gateway         .------------.     2 min ago         |
+  |                    ( o  Active    )                      |
+  |                     '------------'                       |
+  | billing-worker      .------------.     1 h ago           |
+  |                    ( o  Paused    )                      |
+  |                     '------------'                       |
+  +----------------------------------------------------------+
+  o = green dot   ( ) = green pill outline   pale green fill
++--END--
+FIX:
+  Pick one carrier for the state: plain text in the status color with no background, or a
+  square chip with a subtle tint and no dot, or a single sharp icon next to the word.
+  Remove the outline and the dot, and move status into its own aligned column so the word
+  itself carries the meaning.
+ASCII_FIXED:
++--FIXED--
+  Deployments
+  +----------------------------------------------------------+
+  | Service             Status      Last change              |
+  | api-gateway         Active      2 min ago                |
+  | billing-worker      Paused      1 h ago                  |
+  +----------------------------------------------------------+
+  Status is a word only: Active in dark green, Paused in gray.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

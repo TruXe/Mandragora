@@ -1,0 +1,31 @@
+ID: tui-rainbow-ansi
+DOMAIN: tui
+NAME: Rainbow or per-word ANSI coloring
+SEVERITY: 4
+SIGNATURE: tui|color|four-plus-sgr-colors-per-line+per-word-color-switching
+SIGNALS:
+  - Four or more distinct ANSI foreground colors on a single output line
+  - Color changes between consecutive words three or more times per line
+  - Colors assigned by position or cycling, not by the meaning of the token
+  - Bright 90-97 or 256-color codes used for ordinary words like started or file
+STATIC_RULES: tui.rainbow-sgr
+WHY:
+  When every word has its own color, no color means anything and errors stop standing out.
+  Generated CLIs color for decoration because the ANSI library makes it trivial.
+ASCII_SLOP:
++--SLOP--
+  [red]Deploy[/] [green]started[/] [yellow]for[/] [blue]api[/] [magenta]in[/] [cyan]eu-1[/]
+  [cyan]Uploading[/] [magenta]3[/] [yellow]files[/] [green]now[/]
++--END--
+FIX:
+  Reduce color to meaning: default text for normal output, one color for errors, one dim
+  style for metadata. Print state as a word so the output still works with color disabled.
+ASCII_FIXED:
++--FIXED--
+  deploy started  service=api  region=eu-1
+  uploading 3 files (1.2 MB)
+  [red]error[/] upload of assets.tar failed: timeout after 30s
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

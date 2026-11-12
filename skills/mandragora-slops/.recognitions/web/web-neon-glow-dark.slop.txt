@@ -1,0 +1,38 @@
+ID: web-neon-glow-dark
+DOMAIN: web
+NAME: Neon glow dark mode
+SEVERITY: 3
+SIGNATURE: web|dark-theme|colored-zero-offset-glow+on-cards-and-buttons
+SIGNALS:
+  - box-shadow with 0 0 offsets, 10px or more blur and a saturated color
+  - Tailwind colored shadows such as shadow-purple-500/50 or shadow-[0_0_30px_#a855f7]
+  - Applied to two or more cards, buttons or inputs on the same page
+  - Page background near black such as bg-zinc-950, bg-slate-900 or #0a0a0a
+STATIC_RULES: web.neon-glow
+WHY:
+  Colored halos imitate a cyberpunk mood without any light source in the layout. Generators
+  add them to make dark pages feel finished, and every glowing element competes for focus.
+ASCII_SLOP:
++--SLOP--
+    ::::::::::::::::::      ::::::::::::::::::
+   ::+--------------+::    ::+--------------+::
+   ::|  Pro plan    |::    ::|  Team plan   |::
+   ::|  $29         |::    ::|  $79         |::
+   ::+--------------+::    ::+--------------+::
+    ::::::::::::::::::      ::::::::::::::::::
+    : = purple halo, 0 0 30px, on every card
++--END--
+FIX:
+  Remove the colored glows and separate surfaces with value steps (a slightly lighter panel
+  on the dark page) or a 1px border. Keep one restrained focus ring for keyboard focus only.
+ASCII_FIXED:
++--FIXED--
+   +--------------+   +--------------+
+   | Pro plan     |   | Team plan    |
+   | 29 / month   |   | 79 / month   |
+   +--------------+   +--------------+
+   panels one value step lighter than the page, no halos
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

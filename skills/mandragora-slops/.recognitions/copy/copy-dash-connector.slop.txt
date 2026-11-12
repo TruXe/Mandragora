@@ -1,0 +1,30 @@
+ID: copy-dash-connector
+DOMAIN: copy
+NAME: Em dash or spaced hyphen as clause connector
+SEVERITY: 3
+SIGNATURE: copy|punctuation|em-dash-or-spaced-hyphen+joins-clauses
+SIGNALS:
+  - Em dash (U+2014) between clauses, with or without spaces around it
+  - Spaced hyphen or en dash between words used as a pause: word - word
+  - Double hyphen between words standing in for an em dash
+  - Several such connectors in one paragraph
+STATIC_RULES: copy.dash-connector
+WHY:
+  Model-written prose leans on the dash to bolt clauses together instead of choosing a real
+  sentence structure. The density of dashes is one of the most recognized tells.
+ASCII_SLOP:
++--SLOP--
+  Our tool is fast [em dash] really fast [em dash] and it just works.
+  Setup takes minutes - not hours - and you are done.
++--END--
+FIX:
+  Split the sentence at the dash or restructure it: use a period, a comma with a
+  conjunction, or a colon when a list or explanation follows.
+ASCII_FIXED:
++--FIXED--
+  Builds finish in 40 seconds on a laptop.
+  Setup takes about ten minutes. After that, every push deploys.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

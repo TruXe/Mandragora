@@ -1,0 +1,30 @@
+ID: copy-question-reveal
+DOMAIN: copy
+NAME: Rhetorical question reveal (The result?)
+SEVERITY: 3
+SIGNATURE: copy|structure|rhetorical-question-reveal+the-result-question
+SIGNALS:
+  - Short rhetorical questions like The result? The best part? The secret?
+  - The answer follows as a separate punchy sentence
+  - Used to inflate an ordinary outcome into a reveal
+  - Repeated several times in one post or page
+STATIC_RULES: copy.question-reveal
+WHY:
+  The fake suspense is a stock device of model-written posts and landing pages. It delays a
+  plain statement for drama the content does not have.
+ASCII_SLOP:
++--SLOP--
+  We rebuilt the onboarding flow from scratch.
+  The result? A 3x increase in activation.
++--END--
+FIX:
+  Merge the question and answer into one direct sentence that states the result with its
+  baseline and period.
+ASCII_FIXED:
++--FIXED--
+  After the onboarding rebuild, activation rose from 11% to 33%
+  over the following six weeks.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

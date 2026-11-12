@@ -1,0 +1,42 @@
+ID: model3d-uniform-over-subdivision
+DOMAIN: model3d
+NAME: Uniform over-subdivision with low silhouette information
+SEVERITY: 3
+SIGNATURE: model3d|density|uniform-dense-faces+mostly-coplanar-neighbors
+SIGNALS:
+  - 200 or more faces where half or more of interior edges join coplanar faces
+  - Face areas vary by 35 percent or less: one density everywhere
+  - Flat walls carry as many polygons as curved areas
+  - Silhouette would survive with a fraction of the polygons
+STATIC_RULES: model3d.over-subdivision
+WHY:
+  Subdividing everything adds polygons without adding shape. Generated and remeshed models
+  spend their budget on flat areas and still look plain.
+ASCII_SLOP:
++--SLOP--
+  front view of a crate
+  +--+--+--+--+--+--+
+  |  |  |  |  |  |  |
+  +--+--+--+--+--+--+
+  |  |  |  |  |  |  |
+  +--+--+--+--+--+--+
+  |  |  |  |  |  |  |
+  +--+--+--+--+--+--+
+  36 faces on one flat side
++--END--
+FIX:
+  Collapse the coplanar loops so flat areas use the fewest faces that hold the shape, then
+  add density only where the silhouette curves or the mesh deforms.
+ASCII_FIXED:
++--FIXED--
+  front view of a crate
+  +-----------------+
+  |                 |
+  |                 |
+  |                 |
+  +-----------------+
+  1 face on the flat side; loops kept only at curved parts
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

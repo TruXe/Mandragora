@@ -1,0 +1,40 @@
+ID: model3d-perfect-symmetry
+DOMAIN: model3d
+NAME: Perfect bilateral symmetry on an organic object
+SEVERITY: 3
+SIGNATURE: model3d|form|exact-mirror-symmetry+organic-or-worn-object
+SIGNALS:
+  - 99.5 percent or more of vertices have an exact mirror partner across one axis plane
+  - Object is organic or worn by name (rock, tree, skull, creature) or by smooth surface
+  - Damage, cracks or bumps appear in mirrored pairs
+  - Silhouette from the front is identical when flipped
+STATIC_RULES: model3d.perfect-symmetry
+WHY:
+  Generators and sculpting defaults mirror the model to save work, but stones, faces and worn
+  objects are never exactly symmetric. Matched damage on both sides reveals the mirror.
+ASCII_SLOP:
++--SLOP--
+  front view, rock           mirror plane at |
+        .--''|''--.
+     .-'  ,  |  ,  '-.
+    /  .-'   |   '-.  \
+   |  (      |      )  |
+    \  '-.   |   .-'  /
+     '-.___  |  ___.-'
++--END--
+FIX:
+  Break the symmetry after mirroring: displace one side differently, move cracks and chips to
+  places that make physical sense, and tilt the silhouette so the two halves differ.
+ASCII_FIXED:
++--FIXED--
+  front view, rock
+        .--''''-._
+     .-'   ,      '--.
+    /   .-'     _    \
+   |   (     .-' )    \
+    \   '-.      /     |
+     '-.____.---'-.___/
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

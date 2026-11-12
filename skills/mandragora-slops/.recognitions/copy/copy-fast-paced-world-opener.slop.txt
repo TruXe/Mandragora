@@ -1,0 +1,30 @@
+ID: copy-fast-paced-world-opener
+DOMAIN: copy
+NAME: In today's fast-paced world opener
+SEVERITY: 4
+SIGNATURE: copy|opener|in-todays-fast-paced-world+throat-clearing
+SIGNALS:
+  - Opening clause such as In today's fast-paced world or In today's digital landscape
+  - Variants: In an ever-evolving world, Now more than ever, In this day and age
+  - The opener could precede any topic without change
+  - The first concrete statement arrives only in the second sentence or later
+STATIC_RULES: copy.fast-paced-opener
+WHY:
+  The opener is pure throat-clearing that models use to start any text. Readers recognize it
+  instantly and skip ahead.
+ASCII_SLOP:
++--SLOP--
+  In today's fast-paced digital world, businesses need tools that keep up.
+  That's why we built Acme.
++--END--
+FIX:
+  Remove the opener and start with the first concrete fact: who the product is for and what
+  it changes, in one sentence.
+ASCII_FIXED:
++--FIXED--
+  Acme sends overdue invoice reminders by itself, three days apart,
+  and stops the moment a payment lands.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

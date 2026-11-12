@@ -1,0 +1,32 @@
+ID: copy-title-case-headings
+DOMAIN: copy
+NAME: Title Case on every heading word
+SEVERITY: 2
+SIGNATURE: copy|headings|title-case-every-word+ui-copy
+SIGNALS:
+  - Headings where every major word starts with a capital letter
+  - Two or more such headings, half or more of all judged headings
+  - Applied to UI labels, buttons and doc sections alike
+  - Mixed with sentence case elsewhere, so the style is inconsistent
+STATIC_RULES: copy.title-case-headings
+WHY:
+  Title Case is the default heading style models emit regardless of the product's voice.
+  Modern UI guides use sentence case, which reads faster.
+ASCII_SLOP:
++--SLOP--
+  # Getting Started With The Platform
+  ## How To Configure Your Workspace Settings
+  ## Frequently Asked Questions About Billing
++--END--
+FIX:
+  Convert headings to sentence case: capitalize the first word and proper nouns only, and
+  shorten each heading to the task it describes.
+ASCII_FIXED:
++--FIXED--
+  # Get started
+  ## Configure the workspace
+  ## Billing questions
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

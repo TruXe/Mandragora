@@ -1,0 +1,30 @@
+ID: copy-whether-you-are-hedge
+DOMAIN: copy
+NAME: Whether you are X or Y audience hedge
+SEVERITY: 3
+SIGNATURE: copy|audience|whether-you-are-x-or-y+hedge
+SIGNALS:
+  - Sentences starting Whether you're a beginner or a pro
+  - The two groups span the whole possible audience
+  - Followed by a generic promise that fits both groups
+  - Appears in intros and closing paragraphs
+STATIC_RULES: copy.whether-hedge
+WHY:
+  The hedge avoids choosing an audience, so the copy speaks to nobody in particular. It is a
+  stock construction of model-written intros.
+ASCII_SLOP:
++--SLOP--
+  Whether you're a solo founder or a Fortune 500 enterprise,
+  our platform scales with you.
++--END--
+FIX:
+  Pick the audience the product actually serves and write to their situation. Move other
+  segments to their own page if they matter.
+ASCII_FIXED:
++--FIXED--
+  Built for clinics with 2 to 20 practitioners:
+  booking, reminders and invoices in one place.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

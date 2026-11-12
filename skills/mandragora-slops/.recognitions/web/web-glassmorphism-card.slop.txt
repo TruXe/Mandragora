@@ -1,0 +1,42 @@
+ID: web-glassmorphism-card
+DOMAIN: web
+NAME: Glassmorphism card stack
+SEVERITY: 3
+SIGNATURE: web|card|backdrop-blur+translucent-white-fill+thin-white-border
+SIGNALS:
+  - backdrop-blur (or CSS backdrop-filter: blur()) on a card or panel
+  - Fill is white at 5 to 40 percent opacity, such as bg-white/10
+  - A one pixel border in translucent white, such as border-white/20
+  - Panel floats over a gradient or blurred color blobs to make the blur visible
+  - Several such panels stacked or overlapped at slight offsets
+STATIC_RULES: web.glassmorphism
+WHY:
+  Frosted glass needs a busy background to read at all, so generated pages add gradient blobs
+  just to justify it. The translucent fill also drops text contrast below readable levels.
+ASCII_SLOP:
++--SLOP--
+   .:-=+*#%@%#*+=-:.   blurred purple and blue blobs
+  .:-+-----------------------+-:.
+  :-=|  . . . . . . . . . .  |=-:
+  -=+|   Monthly revenue     |+=-
+  =+*|   $48,200  +12%       |*+=
+  -=+|  . . . . . . . . . .  |+=-
+  :-=+-----------------------+=-:
+   white 10% fill, white 20% hairline border
++--END--
+FIX:
+  Remove the blur and the translucent layer and place the content on an opaque surface with
+  full text contrast. Separate panels by spacing or a single solid divider, and drop the
+  decorative blobs that only existed to show the blur.
+ASCII_FIXED:
++--FIXED--
+  +---------------------------+
+  | Monthly revenue           |
+  | $48,200                   |
+  | +12% vs March (41,000)    |
+  +---------------------------+
+  opaque surface, solid 1px rule, no background blobs
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

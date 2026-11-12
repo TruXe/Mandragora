@@ -1,0 +1,43 @@
+ID: web-vague-verb-hero
+DOMAIN: web
+NAME: Centered hero with vague power verb and two CTAs
+SEVERITY: 4
+SIGNATURE: web|hero|vague-power-verb-headline+centered+two-cta-buttons
+SIGNALS:
+  - The h1 opens with Supercharge, Elevate, Unlock, Unleash, Transform or Empower
+  - The object of the verb is abstract: workflow, productivity, potential, business
+  - Text block centered with a one line subhead under the headline
+  - Two buttons side by side: a filled Get started and an outlined Learn more
+  - No number, no product noun and no named user anywhere above the fold
+STATIC_RULES: web.vague-hero-verb
+WHY:
+  The headline could sit on any product, so it tells the reader nothing about this one. The
+  centered two-button stack is the first layout every generator emits.
+ASCII_SLOP:
++--SLOP--
+  +--------------------------------------------------------------+
+  |                                                              |
+  |              Supercharge your workflow                       |
+  |        The all-in-one platform for modern teams.             |
+  |                                                              |
+  |          [ Get started ]   ( Learn more )                    |
+  |                                                              |
+  +--------------------------------------------------------------+
++--END--
+FIX:
+  Rewrite the headline as a concrete claim with a noun and a number the product owns. Drop the
+  second button, keep one action that names what happens next, and add the proof (a
+  screenshot, a sample output, a customer quote with a name) beside the text.
+ASCII_FIXED:
++--FIXED--
+  +--------------------------------------------------------------+
+  | Turn support tickets into         +------------------------+ |
+  | bug reports with repro steps.     | #4812  Login loop      | |
+  |                                   | Steps: 1 open /auth .. | |
+  | Used by the Halden Studio QA team | Build: 5.2.3  Linux    | |
+  | [ Connect your inbox ]            +------------------------+ |
+  +--------------------------------------------------------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

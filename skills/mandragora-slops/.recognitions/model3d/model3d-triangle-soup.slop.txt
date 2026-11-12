@@ -1,0 +1,37 @@
+ID: model3d-triangle-soup
+DOMAIN: model3d
+NAME: Triangle soup with unwelded vertices
+SEVERITY: 4
+SIGNATURE: model3d|topology|isolated-triangles+duplicated-unwelded-vertices
+SIGNALS:
+  - 90 percent or more of faces share no vertex index with any other face
+  - Welding by position would remove 40 percent or more of the vertices
+  - Smooth shading shows a facet seam on every triangle edge
+  - Vertex count is close to three times the face count
+STATIC_RULES: model3d.triangle-soup
+WHY:
+  Some generators and converters write each triangle with its own vertices. Nothing is
+  connected, so smoothing, UV unwrapping and deformation all break.
+ASCII_SLOP:
++--SLOP--
+  front view, gaps exaggerated
+   /\  /\  /\
+  /__\/__\/__\
+  \  /\  /\  /
+   \/  \/  \/
+  every triangle owns three private vertices
++--END--
+FIX:
+  Weld coincident vertices by distance, rebuild the shared edges, then mark the intended hard
+  edges as sharp instead of keeping them split. Re-export with indexed geometry.
+ASCII_FIXED:
++--FIXED--
+  front view
+    /\/\/\
+   /_\/_\/\
+   \/\/\/\/
+  vertices shared between neighboring faces
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

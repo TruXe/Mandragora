@@ -1,0 +1,41 @@
+ID: texture-short-repeat-period
+DOMAIN: texture
+NAME: Obvious short repeat period
+SEVERITY: 3
+SIGNATURE: texture|tiling|internal-repeat-period+high-autocorrelation-peak
+SIGNALS:
+  - Autocorrelation reaches 0.8 or more at a lag shorter than half the image
+  - Correlation dips by 0.3 or more before that lag, so the peak is a true period
+  - The same motif (a crack, a knot, a stain) appears at a fixed spacing
+  - Stamped as a small tile repeated inside the texture's own bounds
+STATIC_RULES: texture.repeat-period
+WHY:
+  A short internal repeat makes the eye catch the same feature marching across a surface.
+  Generators and quick tiling tools produce it when a small patch is stamped to fill space.
+ASCII_SLOP:
++--SLOP--
+  =--+=+.-=--+=+.-=--+=+.-=--+=+.-=--+=+.-
+  ==-===:-==-===:-==-===:-==-===:-==-===:-
+  =+=+=++-=+=+=++-=+=+=++-=+=+=++-=+=+=++-
+  =**+*++==**+*++==**+*++==**+*++==**+*++=
+  -##+#+*=-##+#+*=-##+#+*=-##+#+*=-##+#+*=
+  -***#+#=-***#+#=-***#+#=-***#+#=-***#+#=
+  the same 8 px column pattern repeats five times
++--END--
+FIX:
+  Replace the stamped patch with a texture authored at the full tile size, and break
+  remaining repetition with large-scale variation: a second low-frequency layer, decals, or
+  vertex color blending in the material instead of a smaller repeat.
+ASCII_FIXED:
++--FIXED--
+  ****#******++++++++===+*##%#***###%##***
+  *****++++++*++++++++=++**##########*****
+  **#*+====+++*+++***+++*++***##%##*******
+  ###+========+==++++++++++****#%##******#
+  %%#*==----====-=++=+++++++****######%##%
+  %%#*==---------=++++***+=++++++*###%%%#%
+  features vary in size and spacing across the whole tile
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

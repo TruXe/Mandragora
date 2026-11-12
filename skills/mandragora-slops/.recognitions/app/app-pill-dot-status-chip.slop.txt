@@ -1,0 +1,33 @@
+ID: app-pill-dot-status-chip
+DOMAIN: app
+NAME: Capsule status chip with dot and matching outline
+SEVERITY: 4
+SIGNATURE: app|status-chip|capsule-shape+inner-dot+outline-matches-dot
+SIGNALS:
+  - Capsule() or RoundedCornerShape(50) or a Border with a large CornerRadius
+  - A Circle() or Ellipse of 6 to 10 points filled with the status color inside it
+  - Capsule stroke or BorderBrush uses the same color as the dot
+  - Label is a single state word such as Online, Active or Pending
+STATIC_RULES: app.pill-dot-chip
+WHY:
+  The chip states one fact three times with shape, dot and outline. It is copied straight
+  from generated web dashboards into native apps.
+ASCII_SLOP:
++--SLOP--
+  Devices
+  Pixel 8         ( o Online  )
+  Studio Mac      ( o Offline )
+  o = colored dot, ( ) = capsule stroke in the dot color
++--END--
+FIX:
+  Keep a single carrier: the state word in the status color, or one system symbol with the
+  word, placed in a fixed column. Remove the capsule outline and the dot.
+ASCII_FIXED:
++--FIXED--
+  Devices
+  Pixel 8         Online    seen now
+  Studio Mac      Offline   seen 2 h ago
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

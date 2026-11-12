@@ -1,0 +1,30 @@
+ID: copy-empty-superlatives
+DOMAIN: copy
+NAME: Empty superlatives with no measurable claim
+SEVERITY: 3
+SIGNATURE: copy|claims|superlative-adjective+no-number-or-comparison
+SIGNALS:
+  - Words such as best-in-class, world-class, industry-leading, unparalleled or cutting-edge
+  - Phrases like lightning-fast, blazing fast or state-of-the-art
+  - The sentence contains no number, benchmark or named comparison
+  - Several superlatives in one paragraph
+STATIC_RULES: copy.empty-superlative
+WHY:
+  A superlative without evidence reads as filler because anyone can claim it. Models produce
+  them by default when asked to sound persuasive.
+ASCII_SLOP:
++--SLOP--
+  Our industry-leading platform delivers lightning-fast,
+  best-in-class performance with cutting-edge technology.
++--END--
+FIX:
+  Replace each superlative with the measurement or comparison it implies, or delete it. Name
+  the benchmark, the competitor or the customer result.
+ASCII_FIXED:
++--FIXED--
+  p95 query time is 48 ms on 2 TB of logs,
+  measured on the public ClickBench dataset.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

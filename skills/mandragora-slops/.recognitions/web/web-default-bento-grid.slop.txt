@@ -1,0 +1,43 @@
+ID: web-default-bento-grid
+DOMAIN: web
+NAME: Default bento grid with uniform gaps
+SEVERITY: 3
+SIGNATURE: web|grid|bento-template+span-only-sizing+uniform-gaps
+SIGNALS:
+  - Grid with grid-cols-3 or grid-cols-4 and four or more tile children
+  - Tiles share identical classes except col-span-2 or row-span-2 on some of them
+  - Fixed row heights through auto-rows-[...] or grid-rows-* regardless of content
+  - Equal gap on every side and the same rounded card style on every tile
+STATIC_RULES: web.default-bento
+WHY:
+  The tile sizes come from a template pattern, not from the content inside them. Short text
+  sits in a large tile and a dense chart is squeezed into a small one.
+ASCII_SLOP:
++--SLOP--
+  +-------------------+ +--------+ +--------+
+  | Feature one       | | Feat 2 | | Feat 3 |
+  |                   | +--------+ +--------+
+  |                   | +-------------------+
+  +-------------------+ | Feature four      |
+  +--------+ +--------+ |                   |
+  | Feat 5 | | Feat 6 | |                   |
+  +--------+ +--------+ +-------------------+
+  spans alternate 2-1-1 / 1-1-2 whatever the content is
++--END--
+FIX:
+  Size each block from its content: measure what each item needs and let the layout follow,
+  for example one wide chart row and a plain list for short items. Drop the fixed row height
+  and vary the gaps to group related items.
+ASCII_FIXED:
++--FIXED--
+  Usage this month
+  +----------------------------------------------+
+  |  ...:::---===+++***###  chart, full width    |
+  +----------------------------------------------+
+  Limits                      Recent jobs
+  API calls  41k / 50k        nightly-export   ok   02:00
+  Storage    12 GB / 20 GB    reindex          fail 03:14
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

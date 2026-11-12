@@ -1,0 +1,30 @@
+ID: copy-rule-of-three
+DOMAIN: copy
+NAME: Rule-of-three padding
+SEVERITY: 3
+SIGNATURE: copy|rhythm|triad-of-filler-adjectives-or-fragments
+SIGNALS:
+  - Three adjectives or abstract nouns in a row: fast, simple, and powerful
+  - At least two of the three items are filler words with no measurable meaning
+  - Three one-word sentences in a row: Fast. Simple. Secure.
+  - Triads repeat across headings, subheads and bullets on the same page
+STATIC_RULES: copy.rule-of-three
+WHY:
+  Models default to triplets because they sound complete. The third item is usually padding
+  that adds rhythm and no information.
+ASCII_SLOP:
++--SLOP--
+  Fast. Simple. Powerful.
+  A modern, flexible, and intuitive platform for speed, clarity, and growth.
++--END--
+FIX:
+  Keep the one quality that is true and measurable, state it with its number, and remove the
+  other two items. Vary sentence length instead of stacking parallel items.
+ASCII_FIXED:
++--FIXED--
+  Cold start in 120 ms.
+  Runs on a single 512 MB instance.
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

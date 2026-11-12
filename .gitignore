@@ -1,0 +1,26 @@
+# Python caches and environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# Local agent state and private notes (never published)
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.cursor/
+.aider*
+.beterm/
+
+# The recognition library skills/*/.recognitions/ is tracked on purpose.

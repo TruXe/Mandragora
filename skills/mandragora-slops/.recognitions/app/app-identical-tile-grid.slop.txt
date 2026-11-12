@@ -1,0 +1,42 @@
+ID: app-identical-tile-grid
+DOMAIN: app
+NAME: Grid of identical stat or feature tiles
+SEVERITY: 3
+SIGNATURE: app|dashboard|identical-tile-grid+label-number-icon-template
+SIGNALS:
+  - Four or more calls of one tile component that differ only in strings and numbers
+  - Tiles placed in LazyVGrid, LazyVerticalGrid, UniformGrid or GridView with fixed columns
+  - Every tile holds the same parts: icon, label, big number, small delta
+  - Tiles have equal size whether the metric matters or not
+STATIC_RULES: app.identical-tile-grid
+WHY:
+  The template gives every number the same visual weight, so the screen has no entry point.
+  Generated dashboards fill the grid first and look for metrics to put in it later.
+ASCII_SLOP:
++--SLOP--
+  +-----------+ +-----------+
+  | [$] Rev   | | [u] Users |
+  | 12,400    | | 1,204     |
+  | +12.5%    | | +8.1%     |
+  +-----------+ +-----------+
+  +-----------+ +-----------+
+  | [o] Orders| | [%] Conv  |
+  | 342       | | 3.2%      |
+  | +4.0%     | | -0.4%     |
+  +-----------+ +-----------+
++--END--
+FIX:
+  Pick the one metric the user acts on and give it a full-width row with its trend line.
+  Move the remaining numbers into a compact list or table with aligned figures, and remove
+  icons that only repeat the label.
+ASCII_FIXED:
++--FIXED--
+  Revenue this month           12,400
+  ..::--==++**##  trend, 30 days
+  ---------------------------------------
+  Orders        342    Users    1,204
+  Conversion    3.2%   Refunds     11
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

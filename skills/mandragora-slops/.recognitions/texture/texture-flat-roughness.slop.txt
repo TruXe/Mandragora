@@ -1,0 +1,41 @@
+ID: texture-flat-roughness
+DOMAIN: texture
+NAME: Flat uniform roughness map
+SEVERITY: 3
+SIGNATURE: texture|roughness-map|single-value+plastic-specular-response
+SIGNALS:
+  - Roughness or gloss map with a luminance spread under 6 levels out of 255
+  - One mid value such as 128 across the whole map
+  - Specular highlights spread evenly over the surface in renders
+  - Worn edges, dirt and fingerprints have no effect on shine
+STATIC_RULES: texture.flat-roughness
+WHY:
+  A constant roughness gives every material the same plastic sheen. Generators that output
+  only a color image fill the other PBR channels with a single value.
+ASCII_SLOP:
++--SLOP--
+  ++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++
+  roughness 0.5 everywhere
++--END--
+FIX:
+  Derive roughness from the material's history: rougher in cavities and dust, smoother on
+  worn high points and handled areas, with a large breakup layer. Paint or bake it as its
+  own map instead of a constant.
+ASCII_FIXED:
++--FIXED--
+  ++++++*+++++++++++++++++++++++++=+++++++
+  ++++++++++++++++++++*+++++++++++++++++++
+  +++++++++++++++++++**+++++++++**++++++++
+  +++++++=========++++++++===+++++++***+++
+  +++++++========+++++*++++===+++++****+++
+  ++++++*++++++===++++++++++++++++++++++++
+  polished patches (=) where hands touch, rough grime (*) in corners
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

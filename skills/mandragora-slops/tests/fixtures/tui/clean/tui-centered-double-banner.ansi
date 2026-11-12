@@ -1,0 +1,2 @@
+sync: 128 files from ./photos to s3://archive/photos
+sync: 12 new, 3 changed, 113 unchanged

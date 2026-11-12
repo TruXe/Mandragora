@@ -1,0 +1,33 @@
+# box with a handle that floats 0.5 units above the lid
+o storage_box
+usemtl painted_steel
+v -1 -1 -1
+v 1 -1 -1
+v 1 1 -1
+v -1 1 -1
+v -1 -1 1
+v 1 -1 1
+v 1 1 1
+v -1 1 1
+f 1 4 3 2
+f 5 6 7 8
+f 1 2 6 5
+f 4 8 7 3
+f 1 5 8 4
+f 2 3 7 6
+o handle
+usemtl black_rubber
+v -0.25 -0.25 1.5
+v 0.25 -0.25 1.5
+v 0.25 0.25 1.5
+v -0.25 0.25 1.5
+v -0.25 -0.25 2
+v 0.25 -0.25 2
+v 0.25 0.25 2
+v -0.25 0.25 2
+f 9 12 11 10
+f 13 14 15 16
+f 9 10 14 13
+f 12 16 15 11
+f 9 13 16 12
+f 10 11 15 14

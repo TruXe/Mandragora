@@ -1,0 +1,36 @@
+ID: app-five-tab-generic-bar
+DOMAIN: app
+NAME: Five generic tabs with a center plus button
+SEVERITY: 2
+SIGNATURE: app|navigation|five-tab-bar+center-plus-button+generic-labels
+SIGNALS:
+  - Bottom bar with exactly five tabs labeled Home, Explore, a plus, Activity and Profile
+  - The middle item is a raised circular plus button that breaks the bar outline
+  - Default outline icons from the system set with no app-specific symbols
+  - Tabs exist before the app has five distinct destinations to fill them
+STATIC_RULES: none (rubric only)
+WHY:
+  The five-tab skeleton is copied from social apps whatever the product does. Empty or
+  duplicated destinations reveal that the structure came before the content.
+ASCII_SLOP:
++--SLOP--
+  +--------------------------------------+
+  |                                      |
+  +------+------+--( + )--+------+-------+
+  | Home | Expl |         | Act. | Prof. |
+  +------+------+---------+------+-------+
++--END--
+FIX:
+  Count the real destinations and build the navigation from them: two or three tabs named
+  after the app's objects, and put creation inside the screen where the object lives.
+ASCII_FIXED:
++--FIXED--
+  +--------------------------------------+
+  | Routes                      [ New ]  |
+  +--------------------+-----------------+
+  |      Routes        |     Logbook     |
+  +--------------------+-----------------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

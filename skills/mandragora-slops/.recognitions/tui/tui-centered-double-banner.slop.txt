@@ -1,0 +1,34 @@
+ID: tui-centered-double-banner
+DOMAIN: tui
+NAME: Centered double-line banner header
+SEVERITY: 3
+SIGNATURE: tui|header|double-line-box-banner+centered-title
+SIGNALS:
+  - A double-line box (corner, double horizontal run, corner) opens the output
+  - The middle line holds the tool name centered with equal padding on both sides
+  - Alternatively the title sits centered between two full-width rows of = or #
+  - The banner prints before any useful line of output
+STATIC_RULES: tui.double-line-banner
+WHY:
+  A centered banner treats the terminal like a splash screen and pushes real output down.
+  It is a stock opening of generated scripts.
+ASCII_SLOP:
++--SLOP--
+  +=====================================+
+  ||        DATA SYNC TOOL v2.0        ||
+  +=====================================+
+  ======================================
+           Starting synchronization
+  ======================================
++--END--
+FIX:
+  Remove the banner. Print the version only with --version, and start the output with the
+  first fact the user needs, such as what is being synced and where.
+ASCII_FIXED:
++--FIXED--
+  sync: 128 files from ./photos to s3://archive/photos
+  sync: 12 new, 3 changed, 113 unchanged
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

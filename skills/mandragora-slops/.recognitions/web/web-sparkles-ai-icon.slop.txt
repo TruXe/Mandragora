@@ -1,0 +1,30 @@
+ID: web-sparkles-ai-icon
+DOMAIN: web
+NAME: Sparkles icon used to mean AI
+SEVERITY: 3
+SIGNATURE: web|icon|sparkles-glyph+labels-ai-feature
+SIGNALS:
+  - Lucide or Heroicons Sparkles component, or a class such as lucide-sparkles
+  - Sparkles emoji (U+2728) or the Material auto_awesome ligature in a label
+  - Placed on buttons or badges for AI actions such as Generate or Ask AI
+  - Same glyph repeated on several unrelated features on one page
+STATIC_RULES: web.sparkles-ai-icon
+WHY:
+  Sparkles say magic, not what the feature does. The glyph is now the stock marker of any
+  generated AI feature, so it reads as a template choice.
+ASCII_SLOP:
++--SLOP--
+   [ * Generate with AI ]   [ * Summarize ]   [ * Magic write ]
+     *  = sparkles icon on every AI button
++--END--
+FIX:
+  Remove the sparkles and label the button with the concrete action and its output, such as
+  Draft reply or Summarize thread. Use an icon only when it depicts that output (a document,
+  a list, a reply arrow).
+ASCII_FIXED:
++--FIXED--
+   [ Draft reply ]   [ Summarize thread (12 messages) ]   [ Fix grammar ]
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

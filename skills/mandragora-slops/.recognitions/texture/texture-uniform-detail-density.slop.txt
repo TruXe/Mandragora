@@ -1,0 +1,41 @@
+ID: texture-uniform-detail-density
+DOMAIN: texture
+NAME: Edge-to-edge equal detail density
+SEVERITY: 3
+SIGNATURE: texture|detail|uniform-density-everywhere+no-wear-logic
+SIGNALS:
+  - Per-block gradient energy varies by 12 percent or less across an 8x8 grid
+  - Scratches, pores or grain spread at the same density over the whole tile
+  - No calm areas and no concentrated wear near edges, corners or contact points
+  - Detail energy is high enough to read, so the surface looks busy everywhere
+STATIC_RULES: texture.detail-density
+WHY:
+  Wear follows use: edges chip, handles polish, corners collect dirt. Detail spread evenly
+  everywhere shows that no story of use was modeled.
+ASCII_SLOP:
++--SLOP--
+  -**#--:-*:+--=#+:-:#****#*-#=*+===-:**#*
+  +*:*=--+-=+=:=---=:+#=*#::*#+:=##*-#=*:#
+  +*-+++=*=-:*:-:+++:==::#:--+:==#:==#+=*-
+  :+#*-*#-+=---=:=:*+:*-=+--=:#:*--=::==##
+  :+:*-#+::-#:===*-*+#+#=++##::+*+-#-:::*:
+  *##*=+**-*:-#=-*=::--#-##=#*=-=#+-==-+:*
+  the same busy detail in every region
++--END--
+FIX:
+  Drive detail with masks: concentrate scratches and dirt where edges, contact and runoff
+  would put them, and leave calm areas between. Reduce the base grain so the masked wear
+  carries the read.
+ASCII_FIXED:
++--FIXED--
+  ++++++===--:===+=+*+:=+====*==+#-:#*++++
+  +====+=======::-+#+=-+==++-++=-=+++=====
+  ==+====+===++*==**===++++++++++=+===+===
+  ===+====*=:--#++++++=+++++===++++=+=+===
+  +=+=====###=***#+++++++--*:::::+==++====
+  =+++=====##-+*#*+=+++++**===+::#==++++==
+  calm field, wear clustered in two zones
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

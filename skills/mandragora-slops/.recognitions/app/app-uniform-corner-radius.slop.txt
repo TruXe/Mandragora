@@ -1,0 +1,47 @@
+ID: app-uniform-corner-radius
+DOMAIN: app
+NAME: One large corner radius on every surface
+SEVERITY: 3
+SIGNATURE: app|surfaces|single-corner-radius-value+applied-to-all-controls
+SIGNALS:
+  - Four or more radius declarations in one view file, all with the same value
+  - The shared value is 8 or more points: CornerRadius="16", .cornerRadius(16), 16.dp
+  - Buttons, text fields, cards, sheets and images all use that one radius
+  - ImGui styles set WindowRounding, FrameRounding, ChildRounding and GrabRounding equal
+STATIC_RULES: app.uniform-radius
+WHY:
+  A single radius pasted on every element erases the difference between a control, a
+  container and a sheet. Generated app UIs reach for 12 or 16 everywhere because it looks
+  soft in a screenshot.
+ASCII_SLOP:
++--SLOP--
+   .------------------------------.
+  (  Search                        )
+   '------------------------------'
+   .-------------.  .-------------.
+  (  Card 1       )(  Card 2       )
+   '-------------'  '-------------'
+   .------------------------------.
+  (        Continue                )
+   '------------------------------'
+   radius 16 on field, cards and button alike
++--END--
+FIX:
+  Assign radius by role: small for inputs and buttons, zero for edge-to-edge lists and
+  panels, larger only for sheets or dialogs that sit above the content. Reduce the number of
+  rounded containers by grouping content in plain sections.
+ASCII_FIXED:
++--FIXED--
+  +------------------------------+    radius 4: field
+  | Search                       |
+  +------------------------------+
+  Recent ------------------------    radius 0: list rows
+  Invoice 1042         12 Mar
+  Invoice 1041         09 Mar
+  +-----------+                      radius 4: button
+  | Continue  |
+  +-----------+
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0

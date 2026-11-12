@@ -1,0 +1,36 @@
+ID: tui-boxed-key-value-table
+DOMAIN: tui
+NAME: Over-padded boxed table for key/value data
+SEVERITY: 3
+SIGNATURE: tui|table|two-column-box-borders+wide-cell-padding+key-value-data
+SIGNALS:
+  - A table with full box borders and exactly two columns: key and value
+  - Three or more rows, each cell padded so content fills under 75 percent of it
+  - Header row such as Property and Value repeats information the keys already give
+  - Border lines take as many rows as the data itself
+STATIC_RULES: tui.boxed-kv-table
+WHY:
+  Two-column data does not need a grid; the borders double the height and break copying.
+  Rich table helpers make this the default output of generated tools.
+ASCII_SLOP:
++--SLOP--
+  +----------------+----------------------+
+  |   Property     |   Value              |
+  +----------------+----------------------+
+  |   Name         |   my-app             |
+  |   Version      |   1.4.2              |
+  |   Node         |   20.11.0            |
+  +----------------+----------------------+
++--END--
+FIX:
+  Remove the borders and print aligned key: value lines, keys padded to the longest key.
+  Offer --json for machine use instead of a drawn table.
+ASCII_FIXED:
++--FIXED--
+  name:     my-app
+  version:  1.4.2
+  node:     20.11.0
++--END--
+SOURCE: seed
+FIRST_SEEN: unseen
+HITS: 0
